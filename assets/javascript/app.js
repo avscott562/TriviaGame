@@ -41,9 +41,23 @@ var questions = [
         choices: ["1989", "1991", "1992", "1993"],
         correctAnswer: "1991"
     },
+    //add more later
 ]
-//add more later
 
 //functions needed
 //new game, reset game, check for correct answer, timer
+
+//display questions and multiple choices on screen
+function questionDeck() {
+    for (i=0; i<questions.length; i++) {
+        $('#question').text(questions[i].question);
+        $('#choice1').text(questions[i].choices[0]);
+        $('#choice2').text(questions[i].choices[1]);
+        $('#choice3').text(questions[i].choices[2]);
+        $('#choice4').text(questions[i].choices[3]);
+    }
+}
+
+questionDeck();
+
 //add more later
