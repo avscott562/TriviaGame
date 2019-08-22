@@ -7,64 +7,75 @@
     <title>Trivia Game</title>
 </head>
 <body>
-    <header>
-        <h1>Totally Trivial Trivia</h1>
-        <h3>Are you smarter than a 5th grader?</h3>
+    <header class="jumbotron text-center">
+        <h1>All Hail the Queen Trivia</h1>
+        <br>
+        <h3>Are you a Queen Latifah fan?</h3>
+        <p>Let's see how much you know about the Queen!</p>
     </header>
     <hr>
-    <div class="timer">
+    <div class="timer text-center mb-2">
         <div>Time Remaining: <span id="time">Time</span></div>
     </div>
-
-    <div id="quiz">
-        <div>question 1</div>
-        <div>multiple choice answers <br>
-            <button class="btn btn-info">Choice 1</button>
-            <button class="btn btn-info">Choice 2</button>
-            <button class="btn btn-info">Choice 3</button>
-            <button class="btn btn-info">Choice 4</button>
-        </div>
-    </div>
-
-    <div id="correct" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div id="quiz" class="text-center">
+                    <div id="question" class="mb-4">question 1</div>
+                    <div>multiple choice answers <br><br>
+                        <button class="btn btn-info">Choice 1</button>
+                        <button class="btn btn-info">Choice 2</button>
+                        <button class="btn btn-info">Choice 3</button>
+                        <button class="btn btn-info">Choice 4</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+            
+                <div id="correct" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Modal body text goes here.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+            
+                <div id="wrong" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Modal body text goes here.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
-
-    <div id="wrong" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 </body>
