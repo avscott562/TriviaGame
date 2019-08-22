@@ -9,15 +9,21 @@
 <body>
     <header>
         <h1>Totally Trivial Trivia</h1>
+        <h3>Are you smarter than a 5th grader?</h3>
     </header>
-
+    <hr>
     <div class="timer">
-        <div>Time Remaining:</div> <span id="time">Time</span>
+        <div>Time Remaining: <span id="time">Time</span></div>
     </div>
 
-    <div class="quiz">
+    <div id="quiz">
         <div>question 1</div>
-        <div>multiple choice answers</div>
+        <div>multiple choice answers <br>
+            <button class="btn btn-info">Choice 1</button>
+            <button class="btn btn-info">Choice 2</button>
+            <button class="btn btn-info">Choice 3</button>
+            <button class="btn btn-info">Choice 4</button>
+        </div>
     </div>
 
     <div id="correct" class="modal" tabindex="-1" role="dialog">
@@ -60,5 +66,6 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
 </html>
