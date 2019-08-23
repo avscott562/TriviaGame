@@ -73,11 +73,10 @@ var questions = [
     //add more later
 ]
 
-//functions needed
-//new game, reset game, check for correct answer, timer
 
 //display questions and multiple choices on screen
 function questionDeck() {
+    // $(".option").on("click");
     //computer randomly selects question
     var currentQuestion = questions[Math.floor(Math.random() * questions.length)];
     //set question to computer selected question
@@ -107,10 +106,19 @@ questionDeck();
 
 //add onclick function to each multiple choice answer
 $(".option").on("click", function() {
+    console.log($(this).attr("data-answer"));
     $(this).addClass('selected');
     $(this).removeClass('option');
+    //turn off on click after user selects an answer
     $(".option").off("click");
+    //check if answer selected matches correct answer
+     if ($(this).attr("data-answer") === answer) {
+        alert("Yes Queen fan!");
+    } else {
+        alert("Sorry");
+    }
 });
 
 
-//add more later
+//functions needed
+//new game, reset game, check for correct answer, timer
