@@ -4,6 +4,12 @@
 //   });
 
 //declare variables
+//current question
+var question = "";
+//current multiple choice answers
+var multiple = [];
+//current correct answer
+var answer = "";
 //time counter
 var time = 0;
 //number of correct answers
@@ -12,6 +18,12 @@ var correct = 0;
 var incorrect = 0;
 //number of unanswered questions
 var unanswered = 0;
+//is question on screen
+var isQuestionDisplayed = false;
+//randomly choose question
+var qNum = [];
+//interval to display quesions
+var questionInterval
 
 //need array of objects for quesitons that will include multiple choice answers and correct answer
 var questions = [
@@ -41,6 +53,23 @@ var questions = [
         choices: ["1989", "1991", "1992", "1993"],
         correctAnswer: "1991"
     },
+    {
+        question: "On what TV show did Queen Latifah make her small screen debut?",
+        choices: ["Fresh Prince of Bel Air", "Living Single", "A Different World", "Beverly Hills 90210"],
+        correctAnswer: "Fresh Prince of Bel Air"
+    },{
+        question: "In what movie did Queen Latifah make her big screen debut?",
+        choices: ["Set It Off", "Juice", "Jungle Fever", "Living Out Loud"],
+        correctAnswer: "Jungle Fever"
+    },{
+        question: "Queen Latifah earned an Oscar nomination for her role in what movie?",
+        choices: ["The Bone Collector", "Dreamgirls", "Hairspray", "Chicago"],
+        correctAnswer: "Chicago"
+    },{
+        question: "Which of these rappers/actors has Queen Latifah not been in a film with?",
+        choices: ["Busta Rhymes", "Tupac", "Common", "Ice Cube"],
+        correctAnswer: "Busta Rhymes"
+    },
     //add more later
 ]
 
@@ -49,15 +78,33 @@ var questions = [
 
 //display questions and multiple choices on screen
 function questionDeck() {
-    for (i=0; i<questions.length; i++) {
-        $('#question').text(questions[i].question);
-        $('#choice1').text(questions[i].choices[0]);
-        $('#choice2').text(questions[i].choices[1]);
-        $('#choice3').text(questions[i].choices[2]);
-        $('#choice4').text(questions[i].choices[3]);
+    //computer randomly selects question
+    var currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+    //set question to computer selected question
+    question = currentQuestion.question;
+    //set multipe to multiple choice answers of computer selected question
+    multiple = currentQuestion.choices;
+    //set answer to answer of computer selected question
+    answer = currentQuestion.correctAnswer;
+
+    //add computer selected question to the screen
+    $('#question').text("Q: " + question);
+
+    //create elements for multiple choice answers
+    for (i=0; i<multiple.length; i++) {
+        var choice = $('<p>');
+        choice.addClass('option');
+        choice.attr("data-answer", multiple[i])
+        choice.text(multiple[i]);
+        
+        //add multiple choice element to screen
+        $('#multiple').append(choice);
     }
+    isQuestionDisplayed = true;
 }
 
+
 questionDeck();
+
 
 //add more later
