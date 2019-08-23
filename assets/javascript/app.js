@@ -102,8 +102,15 @@ function questionDeck() {
     }
 }
 
-
+//run question loader
 questionDeck();
+
+//add onclick function to each multiple choice answer
+$(".option").on("click", function() {
+    $(this).addClass('selected');
+    $(this).removeClass('option');
+    $(".option").off("click");
+});
 
 
 //add more later
