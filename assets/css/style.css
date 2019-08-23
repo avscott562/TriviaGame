@@ -1,0 +1,17 @@
+.option, .selected {
+    width: fit-content;
+    padding: 8px;
+    display: inline;
+}
+
+.option:hover {
+    border: 3px groove darkblue;
+    border-radius: 10px;
+}
+
+.selected {
+    border-radius: 10px;
+    background: green;
+    color: #fff;
+    font-weight: bold;
+}

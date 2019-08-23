@@ -98,9 +98,8 @@ function questionDeck() {
         choice.text(multiple[i]);
         
         //add multiple choice element to screen
-        $('#multiple').append(choice);
+        $('#multiple'+i).append(choice);
     }
-    isQuestionDisplayed = true;
 }
 
 
