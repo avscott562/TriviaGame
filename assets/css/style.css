@@ -1,3 +1,14 @@
+.header {
+    background-image: url("../images/queenblue.jpeg");
+    background-repeat: repeat repeat;
+    background-size: 100px 100px;
+}
+
+.left, .right {
+    width: 220px;
+    height: 220px;
+}
+
 .option, .selected {
     width: fit-content;
     padding: 8px;

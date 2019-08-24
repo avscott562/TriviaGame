@@ -7,20 +7,25 @@
     <title>Trivia Game</title>
 </head>
 <body>
-    <header class="jumbotron text-center">
+    <header class="jumbotron text-center header">
         <h1>All Hail the Queen Trivia</h1>
         <br>
         <h3>Are you a Queen Latifah fan?</h3>
         <p>Let's see how much you know about the Queen!</p>
     </header>
-    <hr>
-    <div class="timer text-center mb-2">
-        <div>Time Remaining: <span id="time">Time</span></div>
-    </div>
     <br>
-    <div class="container">
+    <div class="container pb-3">
         <div class="row">
-            <div class="col-md-1"></div>
+            <div class="col-12">
+                <div class="timer text-center mb-5">
+                    <div>Time Remaining: <span id="time">Time</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <img class="left" src="assets/images/queenred.jpg" alt="queen latifah">
+            </div>
             <div class="col-md-10">
                 <div id="quiz" class="text-center">
                     <h6 id="question" class="mb-5">question 1</h6>
@@ -46,7 +51,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1 right">
+                    <img class="left" src="assets/images/queenmom.jpg" alt="queen latifah">
+            </div>
         </div>
     </div>
 
@@ -81,9 +88,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Oh no!</h5>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button> -->
                 </div>
                 <div class="modal-body container-fluid missed-body">
                     <p>You have to be a bit faster!</p>
