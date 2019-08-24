@@ -22,12 +22,17 @@ var quantity = 0;
 //interval to display quesions
 var questionInterval
 
-//api key
-var giphy = "&api_key=GYHcoSDnNTboO0ZRaXgPLt7ixB2VEDWn";
-
-//api search
-var search = "http://api.giphy.com/v1/gifs/search?";
-
+var timeGiphs = ["https://media.giphy.com/media/fUwOs80ja3sTPpjndh/giphy.gif", "https://media.giphy.com/media/26DMWIeEzULoypZwQ/giphy.gif", 
+"https://media.giphy.com/media/26DNibhe8qS7c8dQk/giphy.gif", "https://media.giphy.com/media/1j9lR5RXCgxAnD74dC/giphy.gif", 
+"https://media.giphy.com/media/ZO91JK6HBDeCMQXkK4/giphy.gif", "https://media.giphy.com/media/236NoPWibFgVi8lBgi/giphy.gif", 
+"https://media.giphy.com/media/MbMYXzPrnlb7Umzagy/giphy.gif", "https://media.giphy.com/media/xTiN0DF9fiiK0PR43K/giphy.gif", 
+"https://media.giphy.com/media/aTqhkMQLbV2c8/giphy.gif", "https://media.giphy.com/media/u5wMMs5a75Sg0/giphy.gif", "https://media.giphy.com/media/JnAnDFn7WUkaRgWzf6/giphy.gif",
+"https://media.giphy.com/media/wopWMLdax7xfxkRggF/giphy.gif", "https://media.giphy.com/media/99S1Zo5Z0gByg/giphy.gif", "https://media.giphy.com/media/xl2A1ymCaeS2YD484h/giphy.gif", 
+"https://media.giphy.com/media/J3Gl6FkCXWLdBrOOnx/giphy.gif", "https://media.giphy.com/media/2vobXsTcSuDKlrKbIc/giphy.gif", "https://media.giphy.com/media/XfzbkkoaGKTl8SoJcD/giphy.gif", 
+"https://media.giphy.com/media/FUaRsnZZSI3bG/giphy.gif", "https://media.giphy.com/media/3ohzdQanxr1ze46vks/giphy.gif", 
+"https://media.giphy.com/media/cJT8hgZsfTwPG5orV9/giphy.gif", "https://media.giphy.com/media/l0ErLeqamV3UOARsA/giphy.gif", "https://media.giphy.com/media/rxnhSy4J3KyXe/giphy.gif", 
+"https://media.giphy.com/media/1QjvDoZRq3ySdU9k54/giphy.gif", "https://media.giphy.com/media/l0K3Yo4nAuuV6LZjG/giphy.gif", "https://media.giphy.com/media/2xPS7HlTzzwzvFPi5P/giphy.gif",
+"https://media.giphy.com/media/2KRhDQXjKzN8A/giphy.gif", "https://media.giphy.com/media/UQb6FaAQCunOtx1QJm/giphy.gif", "https://media.giphy.com/media/67SVHjdULKDXFptCTH/giphy.gif"];
 var correctGiphs = ["https://media.giphy.com/media/h13Xr3aT2cTKw/giphy.gif","https://media.giphy.com/media/efJ3wU9Z8SLdUnpUem/giphy.gif",
 "https://media.giphy.com/media/RIuHHNa7UgFKo/giphy.gif", "https://media.giphy.com/media/3HDVFbFQZzJRlC9j1X/giphy.gif", 
 "https://media.giphy.com/media/WS6OOvCIHzaiE9wo7L/giphy.gif", "https://media.giphy.com/media/3ohzdIuqJoo8QdKlnW/giphy.gif", 
@@ -197,6 +202,9 @@ function clock() {
         stop();
         unanswered++;
         console.log(unanswered);
+        var giph = timeGiphs[Math.floor(Math.random() * timeGiphs.length)];
+        var gDisplay = $('<img id="timeImage">').attr("src", giph);
+        $(".missed-body").append(gDisplay);
         //show modal
         $('#missed').addClass('show');
         //add dim background
@@ -204,6 +212,7 @@ function clock() {
         $('body').append(background);
         //remove modal aftr a few seconds
         setTimeout(function() {
+            $('#timeImage').remove();
             $('#missed').removeClass('show');
             $('#background').remove();
         }, 2000);
