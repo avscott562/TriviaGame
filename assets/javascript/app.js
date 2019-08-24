@@ -22,6 +22,32 @@ var quantity = 0;
 //interval to display quesions
 var questionInterval
 
+//api key
+var giphy = "&api_key=GYHcoSDnNTboO0ZRaXgPLt7ixB2VEDWn";
+
+//api search
+var search = "http://api.giphy.com/v1/gifs/search?";
+
+var correctGiphs = ["https://media.giphy.com/media/h13Xr3aT2cTKw/giphy.gif","https://media.giphy.com/media/efJ3wU9Z8SLdUnpUem/giphy.gif",
+"https://media.giphy.com/media/RIuHHNa7UgFKo/giphy.gif", "https://media.giphy.com/media/3HDVFbFQZzJRlC9j1X/giphy.gif", 
+"https://media.giphy.com/media/WS6OOvCIHzaiE9wo7L/giphy.gif", "https://media.giphy.com/media/3ohzdIuqJoo8QdKlnW/giphy.gif", 
+"https://media.giphy.com/media/14sy6VGAd4BdKM/giphy.gif", "https://media.giphy.com/media/lsr3605ZkSCpG/giphy.gif", 
+"https://media.giphy.com/media/141We0f1Lrf8Z2/giphy.gif", "https://media.giphy.com/media/1BhG0U58TwNllcEXcd/giphy.gif", 
+"https://media.giphy.com/media/26DOoDwdNGKAg6UKI/giphy.gif", "https://media.giphy.com/media/9rnoFO1PP1rZYHFRtW/giphy.gif", 
+"https://media.giphy.com/media/ZUOlQXqO0qbAI/giphy.gif", "https://media.giphy.com/media/3o7TKrZceAxICYvD3y/giphy.gif", 
+"https://media.giphy.com/media/l0K43WY66QBYuCvFC/giphy.gif", "https://media.giphy.com/media/ZyuDKmSV5sLNSoaKak/giphy.gif", 
+"https://media.giphy.com/media/TJb9vg2aEHuZ12dVR7/giphy.gif", "https://media.giphy.com/media/13hxeOYjoTWtK8/giphy.gif", 
+"https://media.giphy.com/media/w7mLEAMcpjrpe/giphy.gif", "https://media.giphy.com/media/Urc6MhJ2SpdpKKkz7n/giphy.gif",
+"https://media.giphy.com/media/wAxlCmeX1ri1y/giphy.gif", "https://media.giphy.com/media/8F5Z9rrETggGE4VLpM/giphy.gif",
+"https://media.giphy.com/media/ea3KuP14cRxWo/giphy.gif", "https://media.giphy.com/media/QMkPpxPDYY0fu/giphy.gif"]
+var wrongGiphs = ["https://media.giphy.com/media/kE8bAdv1AKdSqJf2Rw/giphy.gif",
+"https://media.giphy.com/media/1zSz5MVw4zKg0/giphy.gif", "https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif",
+"https://media.giphy.com/media/wYyTHMm50f4Dm/giphy.gif", "https://media.giphy.com/media/VgqtLbNtJEWtVlfMVv/giphy.gif",
+"https://media.giphy.com/media/26gs6vEzlpaxuYgso/giphy.gif", "https://media.giphy.com/media/c5FhF1waAJ5wk/giphy.gif",
+"https://media.giphy.com/media/UTm86phGUMMQE/giphy.gif", "https://media.giphy.com/media/zdq4DT1gHlxny/giphy.gif", 
+"https://media.giphy.com/media/z5WtAAaFpnIgU/giphy.gif", "https://media.giphy.com/media/l378u9el7hENR8OEo/giphy.gif",
+"https://media.giphy.com/media/tPdYQaW6oCIOA/giphy.gif", "https://media.giphy.com/media/Y0Swx3rp8EdXy/giphy.gif",
+"https://media.giphy.com/media/5RKNrDyexEBQynsaNg/giphy.gif", "https://media.giphy.com/media/IBFjeoZ5Oewhi/giphy.gif"]
 //need array of objects for quesitons that will include multiple choice answers and correct answer
 var questions = [
     {
@@ -202,6 +228,9 @@ $(document).on("click", ".option", function() {
     
         //check if answer selected matches correct answer
          if ($(this).attr("data-answer") === answer) {
+             var giph = correctGiphs[Math.floor(Math.random() * correctGiphs.length)];
+             var gDisplay = $('<img id="winImage">').attr("src", giph);
+             $(".win-body").append(gDisplay);
             //show modal
             $('#correct').addClass('show');
             //add dim background
@@ -209,6 +238,7 @@ $(document).on("click", ".option", function() {
             $('body').append(background);
             //remove modal aftr a few seconds
             setTimeout(function() {
+                $('#winImage').remove();
                 $('#correct').removeClass('show');
                 $('#background').remove();
             }, 2000);
@@ -216,6 +246,9 @@ $(document).on("click", ".option", function() {
             //add to correct answer count
             correct++;
         } else {
+            var giph = wrongGiphs[Math.floor(Math.random() * wrongGiphs.length)];
+            var gDisplay = $('<img id="lostImage">').attr("src", giph);
+             $(".wrong-body").append(gDisplay);
             //show modal
             $('#wrong').addClass('show');
              //add dim background
@@ -223,6 +256,7 @@ $(document).on("click", ".option", function() {
              $('body').append(background);
             //remove modal aftr a few seconds
             setTimeout(function() {
+                $('#lostImage').remove();
                 $('#wrong').removeClass('show');
                 $('#background').remove();
             }, 2000);
