@@ -15,8 +15,8 @@ var correct = 0;
 var incorrect = 0;
 //number of unanswered questions
 var unanswered = 0;
-//is question on screen
-var isQuestionDisplayed = false;
+//questions that have been asked
+var questionsAsked = [];
 //number of questions asked
 var quantity = 0;
 //interval to display quesions
@@ -66,6 +66,38 @@ var questions = [
         question: "Which of these rappers/actors has Queen Latifah not been in a film with?",
         choices: ["Busta Rhymes", "Tupac", "Common", "Ice Cube"],
         correctAnswer: "Busta Rhymes"
+    },{
+        question: "On Living Single, what was the of the character played by Queen Latifah?",
+        choices: ["Maxine Shaw", "Lakeisha Jones", "Khadijah James", "Clair Huxtable"],
+        correctAnswer: "Khadijah James"
+    },{
+        question: "Queen Latifah's duet, Ladies First, was with what artist?",
+        choices: ["Monie Love", "MC Lyte", "Lil Kim", "Salt n Peppa"],
+        correctAnswer: "Monie Love"
+    },{
+        question: "What is the name of Queen Latifah's rapping crew and label?",
+        choices: ["All Flavor No Grease", "Flavor Posse", "Real Flavor", "Flavor Unit"],
+        correctAnswer: "Flavor Unit"
+    },{
+        question: "How many Oscars has Queen Latifah won?",
+        choices: ["0", "3", "1", "2"],
+        correctAnswer: "0"
+    },{
+        question: "What did Queen Latifah wear in dedication to her late brother?",
+        choices: ["Lockett", "Car Key", "Flower", "Ribbon"],
+        correctAnswer: "Car Key"
+    },{
+        question: "What year was Queen Latifah honored by VH1 Hip Hop Honors?",
+        choices: ["2009", "2012", "2014", "2016"],
+        correctAnswer: "2016"
+    },{
+        question: "Which of these movies did Queen Latifah not play in?",
+        choices: ["Valentine's Day", "Ice Age", "Best Man", "Last Holiday"],
+        correctAnswer: "Best Man"
+    },{
+        question: "Queen Latifah introduced us to what group that was signed to her label?",
+        choices: ["A Tribe Called Quest", "Outkast", "Boyz II Men", "Naughty By Nature"],
+        correctAnswer: "Naughty By Nature"
     },
     //add more later
 ]
@@ -73,6 +105,7 @@ var questions = [
 
 //display questions and multiple choices on screen
 function questionDeck() {
+    console.log(questions.length);
     //computer randomly selects question
     var currentQuestion = questions[Math.floor(Math.random() * questions.length)];
     //set question to computer selected question
@@ -81,7 +114,7 @@ function questionDeck() {
     multiple = currentQuestion.choices;
     //set answer to answer of computer selected question
     answer = currentQuestion.correctAnswer;
-     time = 30;
+     time = 10;
      $('#time').text(time);
      timer = setInterval(clock, 1000);
     //add computer selected question to the screen
@@ -99,7 +132,37 @@ function questionDeck() {
     }
     //increase total number of questions asked
     quantity++;
+    questionsAsked.push(currentQuestion);
     console.log("questions asked " + quantity);
+    var asked = questions.indexOf(currentQuestion);
+    questions.splice(asked, 1);
+}
+
+function gameOver() {
+    if (quantity < 5) {
+        //put up a new question
+        setTimeout(function() {
+            $('#question').empty();
+            $('.choiceAnswers').empty();
+        }, 3100);
+        setTimeout(questionDeck, 3500);
+    } else {
+        setTimeout(function() {
+            $('#background').remove();
+            $('#correct').removeClass('show');
+            $('#wrong').removeClass('show');
+            $('#won').text("You answered " + correct + " questions correctly.");
+            $('#lost').text("You answered " + incorrect + " questions incorrectly.");
+            $('#neither').text("You didn't answer " + unanswered + " questions.");
+            $('#over').addClass('show');
+            //add dim background
+            var background = $('<div id="background">').addClass('modal-backdrop show');
+            $('body').append(background);
+            console.log("Game Over");
+        })
+        //show modal
+        
+    }
 }
 
 function clock() {
@@ -120,17 +183,10 @@ function clock() {
             $('#missed').removeClass('show');
             $('#background').remove();
         }, 3000);
-        
-        if (quantity < 5) {
-            //put up a new question
-            setTimeout(function() {
-                $('#question').empty();
-                $('.choiceAnswers').empty();
-            }, 3100);
-            setTimeout(questionDeck, 3500);
-        } else {
-            console.log("Game Over");
-        }
+        console.log("correct " + correct);
+        console.log("missed " + incorrect);
+        console.log("unanswered " + unanswered);
+       gameOver();
     }
 }
 
@@ -143,7 +199,6 @@ questionDeck();
 
 //add onclick function to each multiple choice answer
 $(document).on("click", ".option", function() {
-    console.log($(this).attr("data-answer"));
         $(this).addClass('selected');
         $(this).removeClass('option');
     
@@ -160,11 +215,6 @@ $(document).on("click", ".option", function() {
                 $('#background').remove();
             }, 3000);
             stop();
-            //put up a new question
-            setTimeout(function() {
-                $('#question').empty();
-                $('.choiceAnswers').empty();
-            }, 3100);
             //add to correct answer count
             correct++;
         } else {
@@ -179,21 +229,25 @@ $(document).on("click", ".option", function() {
                 $('#background').remove();
             }, 3000);
             stop();
-            //put up a new question
-            setTimeout(function() {
-                $('#question').empty();
-                $('.choiceAnswers').empty();
-            }, 3100);
             //add to wrong answer count
             incorrect++;
         }
-        setTimeout(questionDeck, 3500);
-        console.log("correct " + correct);
-        console.log("missed " + incorrect);
-
+        gameOver();
 
 });
 
 
-//functions needed
-//new game, reset game, timer
+//reset game
+function reset() {
+    $('#over').removeClass('show');
+    for (a=0; a<questionsAsked.length; a++) {
+        questions.push(questionsAsked[a]);
+    }
+    console.log(questions);
+}
+
+// $(document).on("click", ".btn", function() {
+//     $('#over').removeClass('show');
+//     $('#background').remove();
+//     reset();
+// });
