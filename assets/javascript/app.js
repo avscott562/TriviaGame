@@ -6,7 +6,9 @@ var multiple = [];
 //current correct answer
 var answer = "";
 //time counter
-var time = 0;
+var time = 30;
+//hold set interval for timer
+var timer;
 //number of correct answers
 var correct = 0;
 //number of incorrect answers
@@ -79,7 +81,9 @@ function questionDeck() {
     multiple = currentQuestion.choices;
     //set answer to answer of computer selected question
     answer = currentQuestion.correctAnswer;
-
+     time = 30;
+     $('#time').text(time);
+     timer = setInterval(clock, 1000);
     //add computer selected question to the screen
     $('#question').text("Q: " + question);
 
@@ -93,67 +97,98 @@ function questionDeck() {
         //add multiple choice element to screen
         $('#multiple'+i).append(choice);
     }
-
     //increase total number of questions asked
     quantity++;
     console.log("questions asked " + quantity);
+}
+
+function clock() {
+    //add interval to track seconds
+    time--;
+    $('#time').text(time);
+    if(time === 0) {
+        stop();
+        unanswered++;
+        console.log(unanswered);
+        //show modal
+        $('#missed').addClass('show');
+        //add dim background
+        var background = $('<div id="background">').addClass('modal-backdrop show');
+        $('body').append(background);
+        //remove modal aftr a few seconds
+        setTimeout(function() {
+            $('#missed').removeClass('show');
+            $('#background').remove();
+        }, 3000);
+        //put up a new question
+        setTimeout(function() {
+            $('#question').empty();
+            $('.choiceAnswers').empty();
+        }, 3100);
+        setTimeout(questionDeck, 3500);
+    }
+}
+
+function stop() {
+    clearInterval(timer);
 }
 
 //run question loader
 questionDeck();
 
 //add onclick function to each multiple choice answer
-$(".option").on("click", function() {
-    console.log($(this).attr("data-answer"));
-    $(this).addClass('selected');
-    $(this).removeClass('option');
-    //turn off on click after user selects an answer
-    $(".option").off("click");
-    //check if answer selected matches correct answer
-     if ($(this).attr("data-answer") === answer) {
-        //show modal
-        $('#correct').addClass('show');
-        //add dim background
-        var background = $('<div id="background">').addClass('modal-backdrop show');
-        $('body').append(background);
-        //remove modal aftr a few seconds
-        setTimeout(function() {
-            $('#correct').removeClass('show');
-            $('#background').remove();
-        }, 3000);
-        
-        //put up a new question
-        setTimeout(function() {
-            $('#question').empty();
-            $('.choiceAnswers').empty();
-        }, 3100);
-        
+$(".option").on("click", checkAnswer);
+
+function checkAnswer() {
+        console.log($(this).attr("data-answer"));
+        $(this).addClass('selected');
+        $(this).removeClass('option');
+    
+        //check if answer selected matches correct answer
+         if ($(this).attr("data-answer") === answer) {
+            //show modal
+            $('#correct').addClass('show');
+            //add dim background
+            var background = $('<div id="background">').addClass('modal-backdrop show');
+            $('body').append(background);
+            //remove modal aftr a few seconds
+            setTimeout(function() {
+                $('#correct').removeClass('show');
+                $('#background').remove();
+            }, 3000);
+            
+            //put up a new question
+            setTimeout(function() {
+                $('#question').empty();
+                $('.choiceAnswers').empty();
+            }, 3100);
+            //add to correct answer count
+            correct++;
+        } else {
+            //show modal
+            $('#wrong').addClass('show');
+             //add dim background
+             var background = $('<div id="background">').addClass('modal-backdrop show');
+             $('body').append(background);
+            //remove modal aftr a few seconds
+            setTimeout(function() {
+                $('#wrong').removeClass('show');
+                $('#background').remove();
+            }, 3000);
+            
+            //put up a new question
+            setTimeout(function() {
+                $('#question').empty();
+                $('.choiceAnswers').empty();
+            }, 3100);
+            //add to wrong answer count
+            incorrect++;
+        }
         setTimeout(questionDeck, 3500);
-        correct++;
-    } else {
-        //show modal
-        $('#wrong').addClass('show');
-         //add dim background
-         var background = $('<div id="background">').addClass('modal-backdrop show');
-         $('body').append(background);
-        //remove modal aftr a few seconds
-        setTimeout(function() {
-            $('#wrong').removeClass('show');
-            $('#background').remove();
-        }, 3000);
-        
-        //put up a new question
-        setTimeout(function() {
-            $('#question').empty();
-            $('.choiceAnswers').empty();
-        }, 3100);
-        
-        setTimeout(questionDeck, 3500);
-        incorrect++;
-    }
-    console.log("correct " + correct);
-    console.log("missed " + incorrect);
-});
+        console.log("correct " + correct);
+        console.log("missed " + incorrect);
+
+}
 
 
 //functions needed
