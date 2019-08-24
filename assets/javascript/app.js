@@ -1,8 +1,3 @@
-//code from bootstrap to bring focus to modal
-// $('#myModal').on('shown.bs.modal', function () {
-//     $('#myInput').trigger('focus')
-//   });
-
 //declare variables
 //current question
 var question = "";
@@ -20,8 +15,8 @@ var incorrect = 0;
 var unanswered = 0;
 //is question on screen
 var isQuestionDisplayed = false;
-//randomly choose question
-var qNum = [];
+//number of questions asked
+var quantity = 0;
 //interval to display quesions
 var questionInterval
 
@@ -76,7 +71,6 @@ var questions = [
 
 //display questions and multiple choices on screen
 function questionDeck() {
-    // $(".option").on("click");
     //computer randomly selects question
     var currentQuestion = questions[Math.floor(Math.random() * questions.length)];
     //set question to computer selected question
@@ -99,6 +93,10 @@ function questionDeck() {
         //add multiple choice element to screen
         $('#multiple'+i).append(choice);
     }
+
+    //increase total number of questions asked
+    quantity++;
+    console.log("questions asked " + quantity);
 }
 
 //run question loader
@@ -113,12 +111,50 @@ $(".option").on("click", function() {
     $(".option").off("click");
     //check if answer selected matches correct answer
      if ($(this).attr("data-answer") === answer) {
-        alert("Yes Queen fan!");
+        //show modal
+        $('#correct').addClass('show');
+        //add dim background
+        var background = $('<div id="background">').addClass('modal-backdrop show');
+        $('body').append(background);
+        //remove modal aftr a few seconds
+        setTimeout(function() {
+            $('#correct').removeClass('show');
+            $('#background').remove();
+        }, 3000);
+        
+        //put up a new question
+        setTimeout(function() {
+            $('#question').empty();
+            $('.choiceAnswers').empty();
+        }, 3100);
+        
+        setTimeout(questionDeck, 3500);
+        correct++;
     } else {
-        alert("Sorry");
+        //show modal
+        $('#wrong').addClass('show');
+         //add dim background
+         var background = $('<div id="background">').addClass('modal-backdrop show');
+         $('body').append(background);
+        //remove modal aftr a few seconds
+        setTimeout(function() {
+            $('#wrong').removeClass('show');
+            $('#background').remove();
+        }, 3000);
+        
+        //put up a new question
+        setTimeout(function() {
+            $('#question').empty();
+            $('.choiceAnswers').empty();
+        }, 3100);
+        
+        setTimeout(questionDeck, 3500);
+        incorrect++;
     }
+    console.log("correct " + correct);
+    console.log("missed " + incorrect);
 });
 
 
 //functions needed
-//new game, reset game, check for correct answer, timer
+//new game, reset game, timer
