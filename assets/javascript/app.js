@@ -56,7 +56,7 @@ var questions = [
         correctAnswer: "Fresh Prince of Bel Air"
     },{
         question: "In what movie did Queen Latifah make her big screen debut?",
-        choices: ["Set It Off", "Juice", "Jungle Fever", "Living Out Loud"],
+        choices: ["Set It Off", "Just Wright", "Jungle Fever", "Living Out Loud"],
         correctAnswer: "Jungle Fever"
     },{
         question: "Queen Latifah earned an Oscar nomination for her role in what movie?",
@@ -68,7 +68,7 @@ var questions = [
         correctAnswer: "Busta Rhymes"
     },{
         question: "On Living Single, what was the of the character played by Queen Latifah?",
-        choices: ["Maxine Shaw", "Lakeisha Jones", "Khadijah James", "Clair Huxtable"],
+        choices: ["Maxine Shaw", "Lakeisha Jones", "Khadijah James", "Claire Huxtable"],
         correctAnswer: "Khadijah James"
     },{
         question: "Queen Latifah's duet, Ladies First, was with what artist?",
@@ -144,8 +144,8 @@ function gameOver() {
         setTimeout(function() {
             $('#question').empty();
             $('.choiceAnswers').empty();
-        }, 3100);
-        setTimeout(questionDeck, 3500);
+        }, 2100);
+        setTimeout(questionDeck, 2500);
     } else {
         setTimeout(function() {
             $('#background').remove();
@@ -153,15 +153,13 @@ function gameOver() {
             $('#wrong').removeClass('show');
             $('#won').text("You answered " + correct + " questions correctly.");
             $('#lost').text("You answered " + incorrect + " questions incorrectly.");
-            $('#neither').text("You didn't answer " + unanswered + " questions.");
+            $('#neither').text("There were " + unanswered + " unanswered questions.");
             $('#over').addClass('show');
             //add dim background
             var background = $('<div id="background">').addClass('modal-backdrop show');
             $('body').append(background);
             console.log("Game Over");
-        })
-        //show modal
-        
+        }, 2000)
     }
 }
 
@@ -182,7 +180,7 @@ function clock() {
         setTimeout(function() {
             $('#missed').removeClass('show');
             $('#background').remove();
-        }, 3000);
+        }, 2000);
         console.log("correct " + correct);
         console.log("missed " + incorrect);
         console.log("unanswered " + unanswered);
@@ -213,7 +211,7 @@ $(document).on("click", ".option", function() {
             setTimeout(function() {
                 $('#correct').removeClass('show');
                 $('#background').remove();
-            }, 3000);
+            }, 2000);
             stop();
             //add to correct answer count
             correct++;
@@ -227,7 +225,7 @@ $(document).on("click", ".option", function() {
             setTimeout(function() {
                 $('#wrong').removeClass('show');
                 $('#background').remove();
-            }, 3000);
+            }, 2000);
             stop();
             //add to wrong answer count
             incorrect++;
@@ -239,15 +237,25 @@ $(document).on("click", ".option", function() {
 
 //reset game
 function reset() {
-    $('#over').removeClass('show');
+    close();
     for (a=0; a<questionsAsked.length; a++) {
         questions.push(questionsAsked[a]);
     }
-    console.log(questions);
+    questionsAsked = [];
+    $('#question').empty();
+    $('.choiceAnswers').empty();
+    quantity = 0;
+    unanswered = 0;
+    correct = 0;
+    incorrect = 0;
+    questionDeck();
 }
 
-// $(document).on("click", ".btn", function() {
-//     $('#over').removeClass('show');
-//     $('#background').remove();
-//     reset();
-// });
+$(".close").on("click", close);
+$("#close").on("click", close);
+$("#play").on("click", reset);
+
+function close() {
+    $('#over').removeClass('show');
+    $('#background').remove();
+};

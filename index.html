@@ -55,9 +55,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">C'Mon Queen Fan!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body container-fluid">
                     <p>You got it!</p>
@@ -84,9 +81,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Oh no!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body container-fluid">
                     <p>You have to be a bit faster!</p>
@@ -100,19 +97,19 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Game Over!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" data-target="#over" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div id="stats" class="modal-body">
+                <div id="stats" class="modal-body container-fluid">
                   <p>Your game stats are :</p>
                   <p id="won"></p>
                   <p id="lost"></p>
                   <p id="neither"></p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Play Again</button>
+                  <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id="play" type="button" class="btn btn-primary">Play Again</button>
                 </div>
               </div>
             </div>
