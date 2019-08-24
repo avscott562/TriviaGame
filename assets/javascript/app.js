@@ -120,12 +120,17 @@ function clock() {
             $('#missed').removeClass('show');
             $('#background').remove();
         }, 3000);
-        //put up a new question
-        setTimeout(function() {
-            $('#question').empty();
-            $('.choiceAnswers').empty();
-        }, 3100);
-        setTimeout(questionDeck, 3500);
+        
+        if (quantity < 5) {
+            //put up a new question
+            setTimeout(function() {
+                $('#question').empty();
+                $('.choiceAnswers').empty();
+            }, 3100);
+            setTimeout(questionDeck, 3500);
+        } else {
+            console.log("Game Over");
+        }
     }
 }
 
@@ -137,10 +142,8 @@ function stop() {
 questionDeck();
 
 //add onclick function to each multiple choice answer
-$(".option").on("click", checkAnswer);
-
-function checkAnswer() {
-        console.log($(this).attr("data-answer"));
+$(document).on("click", ".option", function() {
+    console.log($(this).attr("data-answer"));
         $(this).addClass('selected');
         $(this).removeClass('option');
     
@@ -156,7 +159,7 @@ function checkAnswer() {
                 $('#correct').removeClass('show');
                 $('#background').remove();
             }, 3000);
-            
+            stop();
             //put up a new question
             setTimeout(function() {
                 $('#question').empty();
@@ -175,7 +178,7 @@ function checkAnswer() {
                 $('#wrong').removeClass('show');
                 $('#background').remove();
             }, 3000);
-            
+            stop();
             //put up a new question
             setTimeout(function() {
                 $('#question').empty();
@@ -188,7 +191,8 @@ function checkAnswer() {
         console.log("correct " + correct);
         console.log("missed " + incorrect);
 
-}
+
+});
 
 
 //functions needed
